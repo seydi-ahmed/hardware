@@ -1,0 +1,35 @@
+<div class="home-container">
+  <section class="hero">
+    <div class="container">
+      <h1>Bienvenue sur Hardware Store</h1>
+      <p>Découvrez nos quincailleries et produits de qualité</p>
+    </div>
+  </section>
+  <div class="container">
+    <section class="stores-section">
+      <h2>Nos quincailleries</h2>
+      <div *ngIf="stores.length === 0" class="empty-state">
+        Aucune quincaillerie pour le moment.
+      </div>
+      <div class="stores-grid">
+        <div *ngFor="let store of stores" class="store-card card">
+          <h3>{{ store.name }}</h3>
+          <p class="address">{{ store.address }}</p>
+        </div>
+      </div>
+    </section>
+    <section class="products-section">
+      <h2>Nos produits</h2>
+      <div *ngIf="products.length === 0" class="empty-state">
+        Aucun produit pour le moment.
+      </div>
+      <div class="products-grid">
+        <div *ngFor="let product of products" class="product-card card">
+          <h3>{{ product.name }}</h3>
+          <p class="price">{{ product.price }} €</p>
+          <p class="stock">Stock: {{ product.stock }}</p>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
