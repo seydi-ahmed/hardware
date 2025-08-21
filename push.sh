@@ -1,4 +1,4 @@
 git add .
-git commit -m "entities, repositories and dto"
+git commit -m "Backend Prêt"
 git push gitea
 git push github
