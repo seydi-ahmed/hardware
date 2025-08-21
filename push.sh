@@ -1,4 +1,4 @@
 git add .
-git commit -m "done"
+git commit -m "structure normale"
 git push gitea
 git push github
