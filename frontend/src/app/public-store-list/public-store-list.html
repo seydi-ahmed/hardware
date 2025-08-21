@@ -1,0 +1,25 @@
+<div class="public-store-list-container">
+  <div class="header">
+    <h1>Toutes nos quincailleries</h1>
+    <p>Découvrez l'ensemble de nos quincailleries partenaires</p>
+  </div>
+
+  <div *ngIf="isLoading" class="loading-state">
+    <div class="spinner"></div>
+    <p>Chargement des quincailleries...</p>
+  </div>
+
+  <div *ngIf="!isLoading && stores.length === 0" class="empty-state">
+    <div class="empty-icon">🏪</div>
+    <h3>Aucune quincaillerie</h3>
+    <p>Aucune quincaillerie n'est disponible pour le moment.</p>
+  </div>
+
+  <div *ngIf="!isLoading && stores.length > 0" class="stores-grid">
+    <div *ngFor="let store of stores" class="store-card">
+      <h3>{{ store.name }}</h3>
+      <p class="address">{{ store.address }}</p>
+      <p class="owner">Propriétaire: {{ store.ownerUsername }}</p>
+    </div>
+  </div>
+</div>

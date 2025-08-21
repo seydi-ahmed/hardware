@@ -1,0 +1,26 @@
+<div class="public-product-list-container">
+  <div class="header">
+    <h1>Tous nos produits</h1>
+    <p>Découvrez l'ensemble de notre catalogue de produits</p>
+  </div>
+
+  <div *ngIf="isLoading" class="loading-state">
+    <div class="spinner"></div>
+    <p>Chargement des produits...</p>
+  </div>
+
+  <div *ngIf="!isLoading && products.length === 0" class="empty-state">
+    <div class="empty-icon">📦</div>
+    <h3>Aucun produit</h3>
+    <p>Aucun produit n'est disponible pour le moment.</p>
+  </div>
+
+  <div *ngIf="!isLoading && products.length > 0" class="products-grid">
+    <div *ngFor="let product of products" class="product-card">
+      <h3>{{ product.name }}</h3>
+      <p class="price">Prix: {{ product.price }} €</p>
+      <p class="stock">Stock: {{ product.stock }}</p>
+      <p class="store">Quincaillerie: {{ product.storeName }}</p>
+    </div>
+  </div>
+</div>

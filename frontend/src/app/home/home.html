@@ -22,8 +22,11 @@
     </div>
   </div>
 
-  <div class="stores-section">
-    <h2>Nos quincailleries</h2>
+  <div class="stores-section" (click)="navigateToStores()">
+    <div class="section-header">
+      <h2>Nos quincailleries</h2>
+      <span class="see-all">Voir tout →</span>
+    </div>
     
     <div *ngIf="stores.length === 0" class="empty-state">
       <div class="icon">🏪</div>
@@ -31,15 +34,22 @@
     </div>
     
     <div *ngIf="stores.length > 0" class="stores-grid">
-      <div *ngFor="let store of stores" class="store-card">
+      <div *ngFor="let store of stores.slice(0, 3)" class="store-card">
         <h3>{{ store.name }}</h3>
         <p class="address">{{ store.address }}</p>
+      </div>
+      <div *ngIf="stores.length > 3" class="store-card view-more">
+        <h3>+{{ stores.length - 3 }} autres</h3>
+        <p>Voir toutes les quincailleries</p>
       </div>
     </div>
   </div>
 
-  <div class="products-section">
-    <h2>Nos produits</h2>
+  <div class="products-section" (click)="navigateToProducts()">
+    <div class="section-header">
+      <h2>Nos produits</h2>
+      <span class="see-all">Voir tout →</span>
+    </div>
     
     <div *ngIf="products.length === 0" class="empty-state">
       <div class="icon">📦</div>
@@ -47,10 +57,14 @@
     </div>
     
     <div *ngIf="products.length > 0" class="products-grid">
-      <div *ngFor="let product of products" class="product-card">
+      <div *ngFor="let product of products.slice(0, 3)" class="product-card">
         <h3>{{ product.name }}</h3>
         <p class="price">Prix: {{ product.price }} €</p>
         <p class="stock">Stock: {{ product.stock }}</p>
+      </div>
+      <div *ngIf="products.length > 3" class="product-card view-more">
+        <h3>+{{ products.length - 3 }} autres</h3>
+        <p>Voir tous les produits</p>
       </div>
     </div>
   </div>

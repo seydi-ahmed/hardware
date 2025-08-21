@@ -1,16 +1,16 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { catchError, throwError, Observable } from 'rxjs';
 
-export interface PublicStoreDto {
+export interface PublicStore {
   id: number;
   name: string;
   address: string;
   ownerUsername: string;
 }
 
-export interface PublicProductDto {
+export interface PublicProduct {
   id: number;
   name: string;
   price: number;
@@ -22,29 +22,44 @@ export interface PublicProductDto {
   providedIn: 'root',
 })
 export class PublicService {
-  private baseUrl = `${environment.apiUrl}/api/public`;
+  private http = inject(HttpClient);
+  private apiUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient) {}
-
-  // Get all public stores
-  getStores(): Observable<PublicStoreDto[]> {
-    return this.http.get<PublicStoreDto[]>(`${this.baseUrl}/stores`);
+  getStores(): Observable<PublicStore[]> {
+    return this.http
+      .get<PublicStore[]>(`${this.apiUrl}/api/public/stores`)
+      .pipe(
+        catchError((error) => {
+          return throwError(
+            () => new Error('Erreur lors du chargement des quincailleries')
+          );
+        })
+      );
   }
 
-  // Get all public products
-  getProducts(): Observable<PublicProductDto[]> {
-    return this.http.get<PublicProductDto[]>(`${this.baseUrl}/products`);
+  getProducts(): Observable<PublicProduct[]> {
+    return this.http
+      .get<PublicProduct[]>(`${this.apiUrl}/api/public/products`)
+      .pipe(
+        catchError((error) => {
+          return throwError(
+            () => new Error('Erreur lors du chargement des produits')
+          );
+        })
+      );
   }
 
-  // Get products for a specific store
-  getStoreProducts(storeId: number): Observable<PublicProductDto[]> {
-    return this.http.get<PublicProductDto[]>(
-      `${this.baseUrl}/stores/${storeId}/products`
-    );
-  }
-
-  // Get store by ID (if this endpoint exists)
-  getStore(storeId: number): Observable<PublicStoreDto> {
-    return this.http.get<PublicStoreDto>(`${this.baseUrl}/stores/${storeId}`);
+  getStoreProducts(storeId: number): Observable<PublicProduct[]> {
+    return this.http
+      .get<PublicProduct[]>(
+        `${this.apiUrl}/api/public/stores/${storeId}/products`
+      )
+      .pipe(
+        catchError((error) => {
+          return throwError(
+            () => new Error('Erreur lors du chargement des produits')
+          );
+        })
+      );
   }
 }
