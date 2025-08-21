@@ -1,0 +1,62 @@
+<div class="product-details-container">
+  <div class="header">
+    <button (click)="navigateToProductList()" class="btn btn-link">
+      ← Retour aux produits
+    </button>
+    <h1>Détails du produit</h1>
+    <div *ngIf="store" class="store-info">
+      Quincaillerie : <strong>{{ store.name }}</strong>
+    </div>
+  </div>
+
+  <div *ngIf="isLoading" class="loading-state">
+    <div class="spinner"></div>
+    <p>Chargement du produit...</p>
+  </div>
+
+  <div *ngIf="!isLoading && errorMessage" class="error-state">
+    <p>{{ errorMessage }}</p>
+    <button (click)="loadProduct()" class="btn btn-outline">Réessayer</button>
+  </div>
+
+  <div *ngIf="!isLoading && !errorMessage && product" class="product-details">
+    <div class="product-card">
+      <div class="product-header">
+        <h2>{{ product.name }}</h2>
+        <span class="price">{{ formatPrice(product.price) }}</span>
+      </div>
+
+      <div class="product-info">
+        <div class="info-group">
+          <label>Stock actuel:</label>
+          <span class="stock-amount" [class.low-stock]="product.stock < 10" [class.out-of-stock]="product.stock === 0">
+            {{ product.stock }} unités
+          </span>
+        </div>
+
+        <div class="info-group">
+          <label>Statut:</label>
+          <span class="stock-status" [class]="getStockStatus(product.stock)">
+            {{ getStockStatus(product.stock) }}
+          </span>
+        </div>
+
+        <div class="info-group">
+          <label>Quincaillerie:</label>
+          <span>{{ store?.name }}</span>
+        </div>
+
+        <div class="info-group">
+          <label>Adresse:</label>
+          <span>{{ store?.address }}</span>
+        </div>
+      </div>
+
+      <div class="product-actions">
+        <button (click)="navigateToEdit()" class="btn btn-primary">
+          Modifier le produit
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

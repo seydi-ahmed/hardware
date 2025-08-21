@@ -1,1 +1,57 @@
-<p>store-form works!</p>
+<div class="store-form-container">
+  <div class="header">
+    <button (click)="onCancel()" class="btn btn-link">
+      ← Retour aux quincailleries
+    </button>
+    <h1>{{ isEditMode ? 'Modifier la quincaillerie' : 'Nouvelle quincaillerie' }}</h1>
+  </div>
+
+  <form (ngSubmit)="onSubmit()" #storeForm="ngForm" class="form">
+    <div class="form-group">
+      <label for="name">Nom de la quincaillerie</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        [(ngModel)]="storeData.name"
+        required
+        class="form-control"
+        placeholder="Entrez le nom de votre quincaillerie"
+      >
+    </div>
+
+    <div class="form-group">
+      <label for="address">Adresse</label>
+      <textarea
+        id="address"
+        name="address"
+        [(ngModel)]="storeData.address"
+        required
+        class="form-control"
+        placeholder="Entrez l'adresse complète de votre quincaillerie"
+        rows="3"
+      ></textarea>
+    </div>
+
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+
+    <div class="form-actions">
+      <button
+        type="button"
+        (click)="onCancel()"
+        class="btn btn-outline"
+      >
+        Annuler
+      </button>
+      <button
+        type="submit"
+        [disabled]="!storeForm.valid || isLoading"
+        class="btn btn-primary"
+      >
+        {{ isLoading ? 'Enregistrement...' : (isEditMode ? 'Modifier' : 'Créer') }}
+      </button>
+    </div>
+  </form>
+</div>

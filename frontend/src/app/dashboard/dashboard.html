@@ -1,1 +1,85 @@
-<p>dashboard works!</p>
+<div class="dashboard-container">
+  <div class="dashboard-header">
+    <h1>Tableau de Bord</h1>
+    <p>Gérez vos quincailleries et produits</p>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-icon">🏪</div>
+      <div class="stat-content">
+        <h3>{{ getStoreCount() }}</h3>
+        <p>Quincailleries</p>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon">📦</div>
+      <div class="stat-content">
+        <h3>{{ totalProducts }}</h3>
+        <p>Produits Total</p>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon">🚀</div>
+      <div class="stat-content">
+        <h3>{{ stores.length > 0 ? "Actif" : "Inactif" }}</h3>
+        <p>Statut</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions-section">
+    <div class="section-header">
+      <h2>Mes Quincailleries</h2>
+      <button (click)="navigateToCreateStore()" class="btn btn-primary">
+        <span>+</span> Nouvelle Quincaillerie
+      </button>
+    </div>
+
+    <div *ngIf="isLoading" class="loading-state">
+      <div class="spinner"></div>
+      <p>Chargement de vos quincailleries...</p>
+    </div>
+
+    <div *ngIf="!isLoading && errorMessage" class="error-state">
+      <p>{{ errorMessage }}</p>
+      <button (click)="loadUserData()" class="btn btn-outline">
+        Réessayer
+      </button>
+    </div>
+
+    <div
+      *ngIf="!isLoading && !errorMessage && stores.length === 0"
+      class="empty-state"
+    >
+      <div class="empty-icon">🏪</div>
+      <h3>Aucune quincaillerie</h3>
+      <p>Commencez par créer votre première quincaillerie</p>
+      <button (click)="navigateToCreateStore()" class="btn btn-primary">
+        Créer une Quincaillerie
+      </button>
+    </div>
+
+    <div
+      *ngIf="!isLoading && !errorMessage && stores.length > 0"
+      class="stores-grid"
+    >
+      <div
+        *ngFor="let store of stores"
+        class="store-card"
+        (click)="navigateToStore(store.id)"
+      >
+        <div class="store-header">
+          <h3>{{ store.name }}</h3>
+          <p class="store-address">{{ store.address }}</p>
+        </div>
+        <div class="store-footer">
+          <span class="products-count">0 produits</span>
+          <span class="view-link">Voir les produits →</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

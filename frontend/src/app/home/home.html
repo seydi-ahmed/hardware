@@ -1,35 +1,57 @@
 <div class="home-container">
-  <section class="hero">
-    <div class="container">
-      <h1>Bienvenue sur Hardware Store</h1>
-      <p>Découvrez nos quincailleries et produits de qualité</p>
+  <div class="hero">
+    <h1>Bienvenue sur Diouf Quincaillerie</h1>
+    <p>Découvrez nos quincailleries et produits de qualité</p>
+  </div>
+
+  <div class="features">
+    <div class="feature-card">
+      <div class="icon">🏪</div>
+      <h3>Quincailleries</h3>
+      <p>Découvrez nos quincailleries partenaires</p>
     </div>
-  </section>
-  <div class="container">
-    <section class="stores-section">
-      <h2>Nos quincailleries</h2>
-      <div *ngIf="stores.length === 0" class="empty-state">
-        Aucune quincaillerie pour le moment.
+    <div class="feature-card">
+      <div class="icon">📦</div>
+      <h3>Produits</h3>
+      <p>Parcourez notre catalogue de produits</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">🔧</div>
+      <h3>Qualité</h3>
+      <p>Des produits de qualité professionnelle</p>
+    </div>
+  </div>
+
+  <div class="stores-section">
+    <h2>Nos quincailleries</h2>
+    
+    <div *ngIf="stores.length === 0" class="empty-state">
+      <div class="icon">🏪</div>
+      <p>Aucune quincaillerie pour le moment.</p>
+    </div>
+    
+    <div *ngIf="stores.length > 0" class="stores-grid">
+      <div *ngFor="let store of stores" class="store-card">
+        <h3>{{ store.name }}</h3>
+        <p class="address">{{ store.address }}</p>
       </div>
-      <div class="stores-grid">
-        <div *ngFor="let store of stores" class="store-card card">
-          <h3>{{ store.name }}</h3>
-          <p class="address">{{ store.address }}</p>
-        </div>
+    </div>
+  </div>
+
+  <div class="products-section">
+    <h2>Nos produits</h2>
+    
+    <div *ngIf="products.length === 0" class="empty-state">
+      <div class="icon">📦</div>
+      <p>Aucun produit pour le moment.</p>
+    </div>
+    
+    <div *ngIf="products.length > 0" class="products-grid">
+      <div *ngFor="let product of products" class="product-card">
+        <h3>{{ product.name }}</h3>
+        <p class="price">Prix: {{ product.price }} €</p>
+        <p class="stock">Stock: {{ product.stock }}</p>
       </div>
-    </section>
-    <section class="products-section">
-      <h2>Nos produits</h2>
-      <div *ngIf="products.length === 0" class="empty-state">
-        Aucun produit pour le moment.
-      </div>
-      <div class="products-grid">
-        <div *ngFor="let product of products" class="product-card card">
-          <h3>{{ product.name }}</h3>
-          <p class="price">{{ product.price }} €</p>
-          <p class="stock">Stock: {{ product.stock }}</p>
-        </div>
-      </div>
-    </section>
+    </div>
   </div>
 </div>
