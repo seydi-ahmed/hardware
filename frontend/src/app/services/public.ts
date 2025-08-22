@@ -62,4 +62,29 @@ export class PublicService {
         })
       );
   }
+
+  // public.ts
+  getStoreById(id: number): Observable<PublicStore> {
+    return this.http
+      .get<PublicStore>(`${this.apiUrl}/api/public/stores/${id}`)
+      .pipe(
+        catchError((error) => {
+          return throwError(
+            () => new Error('Erreur lors du chargement de la quincaillerie')
+          );
+        })
+      );
+  }
+
+  getProductById(id: number): Observable<PublicProduct> {
+    return this.http
+      .get<PublicProduct>(`${this.apiUrl}/api/public/products/${id}`)
+      .pipe(
+        catchError((error) => {
+          return throwError(
+            () => new Error('Erreur lors du chargement du produit')
+          );
+        })
+      );
+  }
 }

@@ -1,7 +1,9 @@
-<div class="public-product-list-container">
+<div class="store-products-container">
+  <button (click)="navigateBack()" class="back-button">← Retour à la quincaillerie</button>
+  
   <div class="header">
-    <h1>Tous nos produits</h1>
-    <p>Découvrez l'ensemble de notre catalogue de produits</p>
+    <h1>Produits de {{ storeName }}</h1>
+    <p>Découvrez tous les produits disponibles dans cette quincaillerie</p>
   </div>
 
   <div *ngIf="isLoading" class="loading-state">
@@ -12,7 +14,7 @@
   <div *ngIf="!isLoading && products.length === 0" class="empty-state">
     <div class="empty-icon">📦</div>
     <h3>Aucun produit</h3>
-    <p>Aucun produit n'est disponible pour le moment.</p>
+    <p>Aucun produit n'est disponible dans cette quincaillerie pour le moment.</p>
   </div>
 
   <div *ngIf="!isLoading && products.length > 0" class="products-grid">
@@ -23,7 +25,6 @@
       <h3>{{ product.name }}</h3>
       <p class="price">Prix: {{ product.price }} €</p>
       <p class="stock">Stock: {{ product.stock }}</p>
-      <p class="store">Quincaillerie: {{ product.storeName }}</p>
     </div>
   </div>
 </div>

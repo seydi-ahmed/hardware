@@ -11,6 +11,9 @@ import { ProductFormComponent } from './product-form/product-form';
 import { ProductDetailsComponent } from './product-details/product-details';
 import { PublicStoreListComponent } from './public-store-list/public-store-list';
 import { PublicProductListComponent } from './public-product-list/public-product-list';
+import { PublicProductDetailsComponent } from './public-product-details/public-product-details';
+import { PublicStoreDetailsComponent } from './public-store-details/public-store-details';
+import { PublicStoreProductsComponent } from './public-store-products/public-store-products';
 import { authGuard } from './guards/auth-guard';
 
 export const routes: Routes = [
@@ -19,14 +22,52 @@ export const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'public/stores', component: PublicStoreListComponent },
   { path: 'public/products', component: PublicProductListComponent },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard] },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [authGuard],
+  },
   { path: 'stores', component: StoreListComponent, canActivate: [authGuard] },
-  { path: 'stores/new', component: StoreFormComponent, canActivate: [authGuard] },
-  { path: 'stores/:id/edit', component: StoreFormComponent, canActivate: [authGuard] },
-  { path: 'stores/:id', component: StoreDetailsComponent, canActivate: [authGuard] },
-  { path: 'stores/:storeId/products', component: ProductListComponent, canActivate: [authGuard] },
-  { path: 'stores/:storeId/products/new', component: ProductFormComponent, canActivate: [authGuard] },
-  { path: 'stores/:storeId/products/:id/edit', component: ProductFormComponent, canActivate: [authGuard] },
-  { path: 'stores/:storeId/products/:id', component: ProductDetailsComponent, canActivate: [authGuard] },
-  { path: '**', redirectTo: '' }
+  {
+    path: 'stores/new',
+    component: StoreFormComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'stores/:id/edit',
+    component: StoreFormComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'stores/:id',
+    component: StoreDetailsComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'stores/:storeId/products',
+    component: ProductListComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'stores/:storeId/products/new',
+    component: ProductFormComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'stores/:storeId/products/:id/edit',
+    component: ProductFormComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'stores/:storeId/products/:id',
+    component: ProductDetailsComponent,
+    canActivate: [authGuard],
+  },
+  { path: 'public/stores/:id', component: PublicStoreDetailsComponent },
+  { path: 'public/products/:id', component: PublicProductDetailsComponent },
+  {
+    path: 'public/stores/:id/products',
+    component: PublicStoreProductsComponent,
+  },
+  { path: '**', redirectTo: '' },
 ];

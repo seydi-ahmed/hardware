@@ -1,4 +1,4 @@
 git add .
-git commit -m "à 90%"
+git commit -m "à 100% done"
 git push gitea
 git push github

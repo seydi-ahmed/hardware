@@ -56,6 +56,21 @@ public class PublicController {
         return dto;
     }
 
+    // PublicController.java
+    @GetMapping("/stores/{id}")
+    public PublicStoreDto getStoreById(@PathVariable Long id) {
+        HardwareStore store = hardwareStoreRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Store not found"));
+        return convertToStoreDto(store);
+    }
+
+    @GetMapping("/products/{id}")
+    public PublicProductDto getProductById(@PathVariable Long id) {
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Product not found"));
+        return convertToProductDto(product);
+    }
+
     private PublicProductDto convertToProductDto(Product product) {
         PublicProductDto dto = new PublicProductDto();
         dto.setId(product.getId());
@@ -65,4 +80,5 @@ public class PublicController {
         dto.setStoreName(product.getStore().getName());
         return dto;
     }
+
 }

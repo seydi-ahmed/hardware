@@ -1,0 +1,22 @@
+<!-- public-store-details.html -->
+<div class="store-details-container">
+  <button (click)="navigateBack()" class="back-button">← Retour</button>
+  
+  <div *ngIf="isLoading" class="loading">
+    <p>Chargement...</p>
+  </div>
+
+  <div *ngIf="!isLoading && store" class="store-details">
+    <h1>{{ store.name }}</h1>
+    <p class="address">{{ store.address }}</p>
+    <p class="owner">Propriétaire: {{ store.ownerUsername }}</p>
+    
+    <div class="actions">
+      <button 
+        class="btn-primary"
+        (click)="viewStoreProducts(store.id)">
+        Voir les produits
+      </button>
+    </div>
+  </div>
+</div>

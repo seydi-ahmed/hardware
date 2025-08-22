@@ -1,0 +1,14 @@
+<div class="product-details-container">
+  <button (click)="navigateBack()" class="back-button">← Retour</button>
+  
+  <div *ngIf="isLoading" class="loading">
+    <p>Chargement...</p>
+  </div>
+
+  <div *ngIf="!isLoading && product" class="product-details">
+    <h1>{{ product.name }}</h1>
+    <p class="price">Prix: {{ product.price }} €</p>
+    <p class="stock">Stock: {{ product.stock }}</p>
+    <p class="store">Vendu par: {{ product.storeName }}</p>
+  </div>
+</div>
