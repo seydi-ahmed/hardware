@@ -46,7 +46,7 @@ Une application complète de gestion de quincaillerie développée avec Spring B
 - Docker Compose installé
 
 
-## 🔧 Développement Local
+## 🔧 Démarrage de l'application
 
 ### Backend
 ```bash
@@ -93,21 +93,6 @@ hardware/
 │   └── package.json       # Dépendances Node.js
 └── docker-compose.yml     # Configuration multi-containers
 ```
-
-### Démarrage de l'application
-```bash
-# Cloner le repository (si ce n'est pas déjà fait)
-git clone https://github.com/seydi-ahmed/hardware.git
-cd hardware
-
-# Lancer l'application avec Docker Compose
-docker-compose up --build
-```
-
-### Accès à l'application
-- **Frontend** : http://localhost
-- **Backend API** : http://localhost:8080
-- **Base de données** : localhost:5432
 
 ## 📋 API Endpoints
 
