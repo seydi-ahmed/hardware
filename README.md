@@ -113,5 +113,6 @@ Pour la documentation complète des endpoints API, consultez le fichier [Endpoin
     - GitHub : [@seydi-ahmed](https://github.com/seydi-ahmed)  
     - Email : diouf.mouhamed3@ugb.edu.sn
     - Tel : +221776221681
+    - LinkedIn: [@Mouhamed Diouf](www.linkedin.com/in/mouhamed-diouf-435207174)
 
 ---
