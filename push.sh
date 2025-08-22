@@ -1,4 +1,4 @@
 git add .
-git commit -m "à 100% done"
+git commit -m "Cahier des charges"
 git push gitea
 git push github
