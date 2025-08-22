@@ -24,3 +24,7 @@
 - `GET /api/public/stores` - Récupérer toutes les quincailleries (publiques)
 - `GET /api/public/products` - Récupérer tous les produits (publics)
 - `GET /api/public/stores/{storeId}/products` - Récupérer les produits d'une quincaillerie spécifique (public)
+
+
+
+

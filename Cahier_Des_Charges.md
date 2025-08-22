@@ -10,7 +10,6 @@ Développement d'une application web complète pour la gestion d'une quincailler
 - Offrir une interface de gestion des produits pour chaque magasin
 - Fournir une vitrine publique des magasins et produits disponibles
 - Assurer la sécurité des données avec authentification JWT
-- Containeriser l'application pour un déploiement facile
 
 ---
 
@@ -18,7 +17,6 @@ Développement d'une application web complète pour la gestion d'une quincailler
 - Backend: Spring Boot 3.5.5, Spring Security, JWT, Spring Data JPA
 - Frontend: Angular 20, Angular Router
 - Base de données: PostgreSQL
-- Containerisation: Docker, Docker Compose
 
 ---
 

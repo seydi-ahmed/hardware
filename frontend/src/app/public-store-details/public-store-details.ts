@@ -6,7 +6,7 @@ import { Router } from '@angular/router'; // Correction: importer depuis '@angul
 
 @Component({
   selector: 'app-store-details',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule],
   templateUrl: './public-store-details.html',
   styleUrls: ['./public-store-details.scss'],
 })
