@@ -1,4 +1,4 @@
 git add .
-git commit -m "Cahier des charges"
+git commit -m "Readme"
 git push gitea
 git push github

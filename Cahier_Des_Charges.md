@@ -79,3 +79,5 @@ Développement d'une application web complète pour la gestion d'une quincailler
     - Containerisation avec Docker
     - Orchestration avec Docker Compose
     - Base de données PostgreSQL containerisée
+    - Serveur Nginx pour servir l'application Angular
+    - Environnement de production configuré
