@@ -1,46 +1,131 @@
 .navbar {
   // background-color: var(--primary-color);
-    background: linear-gradient(135deg, var(--primary-color), #ec0808);
+  background: linear-gradient(135deg, var(--primary-color), #ec0808);
+
 
   color: white;
   padding: 16px 0;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
   .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
+
   .logo {
     font-size: 24px;
     font-weight: bold;
     text-decoration: none;
     color: white;
   }
+
+  // .nav-links {
+  //   display: flex;
+  //   gap: 20px;
+  //   align-items: center;
+
+  //   a {
+  //     color: rgb(255, 255, 255);
+  //     text-decoration: none;
+  //     font-weight: 500;
+  //     transition: opacity 0.3s ease;
+
+  //     &:hover {
+  //       opacity: 0.8;
+  //     }
+  //   }
+
+  //   button {
+  //     margin-left: 10px;
+  //   }
+  // }
+
   .nav-links {
     display: flex;
     gap: 20px;
     align-items: center;
+
     a {
       color: rgb(255, 255, 255);
       text-decoration: none;
-      font-weight: 500;
-      transition: opacity 0.3s ease;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.3s ease;
+
       &:hover {
-        opacity: 0.8;
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      }
+
+      &:active {
+        transform: translateY(0);
       }
     }
+
     button {
       margin-left: 10px;
+      background: linear-gradient(135deg, #ffffff, #f5f5f5);
+      color: #ec0808;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: linear-gradient(135deg, #f5f5f5, #ffffff);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      }
     }
   }
 }
+
 .footer {
   background-color: var(--primary-color);
   color: white;
   text-align: center;
   padding: 20px 0;
   margin-top: 40px;
+
   p {
     margin: 0;
+  }
+}
+
+.accueil {
+  .logo {
+    background: linear-gradient(135deg, #ffffff, #ec0808); // Blanc vers rouge
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 4px 8px;
+    display: inline-block;
+
+    // Effet d'ombre plus prononcé pour contraste sur fond bleu
+    text-shadow:
+      0px 0px 2px rgba(255, 255, 255, 0.3),
+      0px 0px 4px rgba(236, 8, 8, 0.2);
+
+    // Animation au survol
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: scale(1.05);
+      text-shadow:
+        0px 0px 6px rgba(255, 255, 255, 0.5),
+        0px 0px 12px rgba(236, 8, 8, 0.4);
+    }
   }
 }
