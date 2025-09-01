@@ -1,5 +1,7 @@
 .navbar {
-  background-color: var(--primary-color);
+  // background-color: var(--primary-color);
+    background: linear-gradient(135deg, var(--primary-color), #ec0808);
+
   color: white;
   padding: 16px 0;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -19,7 +21,7 @@
     gap: 20px;
     align-items: center;
     a {
-      color: white;
+      color: rgb(255, 255, 255);
       text-decoration: none;
       font-weight: 500;
       transition: opacity 0.3s ease;

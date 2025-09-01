@@ -11,7 +11,7 @@ import { AuthService } from './services/auth';
   styleUrl: './app.scss'
 })
 export class AppComponent {
-  title = 'Diouf Hardware';
+  title = 'Sen Fibem';
 
   constructor(public authService: AuthService) {}
 

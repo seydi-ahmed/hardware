@@ -1,7 +1,9 @@
 <div class="home-container">
   <div class="hero">
-    <h1>Bienvenue sur Diouf Quincaillerie</h1>
-    <p>Découvrez nos quincailleries et produits de qualité</p>
+    <!-- <h1>Bienvenue sur Diouf Quincaillerie</h1>
+    <p>Découvrez nos quincailleries et produits de qualité</p> -->
+    <img src="/logo.bmp" alt="Diouf Hardware" class="logo">
+
   </div>
 
   <div class="features">
@@ -27,12 +29,12 @@
       <h2>Nos quincailleries</h2>
       <span class="see-all">Voir tout →</span>
     </div>
-    
+
     <div *ngIf="stores.length === 0" class="empty-state">
       <div class="icon">🏪</div>
       <p>Aucune quincaillerie pour le moment.</p>
     </div>
-    
+
     <div *ngIf="stores.length > 0" class="stores-grid">
       <div *ngFor="let store of stores.slice(0, 3)" class="store-card">
         <h3>{{ store.name }}</h3>
@@ -50,12 +52,12 @@
       <h2>Nos produits</h2>
       <span class="see-all">Voir tout →</span>
     </div>
-    
+
     <div *ngIf="products.length === 0" class="empty-state">
       <div class="icon">📦</div>
       <p>Aucun produit pour le moment.</p>
     </div>
-    
+
     <div *ngIf="products.length > 0" class="products-grid">
       <div *ngFor="let product of products.slice(0, 3)" class="product-card">
         <h3>{{ product.name }}</h3>

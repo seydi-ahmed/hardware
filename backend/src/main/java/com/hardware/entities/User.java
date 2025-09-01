@@ -2,6 +2,7 @@ package com.hardware.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import com.hardware.enums.*;
 
 import java.util.List;
 
@@ -23,7 +24,15 @@ public class User {
     private String email;
     private String password;
 
+    @Enumerated(EnumType.STRING)
+    @Builder.Default
+    private Role role = Role.OWNER; // par défaut OWNER
+
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private List<HardwareStore> hardwareStores;
+
+    // Relation gérant → une seule quincaillerie
+    @OneToOne(mappedBy = "gerant")
+    private HardwareStore managedStore;
 }

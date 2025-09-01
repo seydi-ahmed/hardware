@@ -26,6 +26,10 @@ public class HardwareStore {
     @JoinColumn(name = "user_id")
     private User owner;
 
+    @OneToOne
+    @JoinColumn(name = "gerant_id")
+    private User gerant;
+
     @OneToMany(mappedBy = "store", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private List<Product> products;

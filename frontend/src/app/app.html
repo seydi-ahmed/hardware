@@ -1,29 +1,19 @@
 <header>
-  <nav class="navbar">
-    <div class="container">
-      <a routerLink="/" class="logo">{{ title }}</a>
-      <div class="nav-links">
-        <a routerLink="/">Accueil</a>
-        <a *ngIf="!authService.isLoggedIn()" routerLink="/login">Connexion</a>
-        <a *ngIf="!authService.isLoggedIn()" routerLink="/register"
-          >Inscription</a
-        >
-        <a *ngIf="authService.isLoggedIn()" routerLink="/dashboard"
-          >Dashboard</a
-        >
-        <a *ngIf="authService.isLoggedIn()" routerLink="/stores"
-          >Mes quincailleries</a
-        >
-        <button
-          *ngIf="authService.isLoggedIn()"
-          (click)="logout()"
-          class="btn btn-accent"
-        >
-          Déconnexion
-        </button>
+    <nav class="navbar">
+      <div class="container">
+        <a routerLink="/" class="logo">{{ title }}</a>
+        <div class="nav-links">
+          <a routerLink="/">Accueil</a>
+          <a *ngIf="!authService.isLoggedIn()" routerLink="/login">Connexion</a>
+          <a *ngIf="!authService.isLoggedIn()" routerLink="/register">Inscription</a>
+          <a *ngIf="authService.isLoggedIn()" routerLink="/dashboard">Dashboard</a>
+          <a *ngIf="authService.isLoggedIn()" routerLink="/stores">Mes quincailleries</a>
+          <button *ngIf="authService.isLoggedIn()" (click)="logout()" class="btn btn-accent">
+            Déconnexion
+          </button>
+        </div>
       </div>
-    </div>
-  </nav>
+    </nav>
 </header>
 <main>
   <router-outlet></router-outlet>
