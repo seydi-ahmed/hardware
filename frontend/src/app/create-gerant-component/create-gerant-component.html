@@ -1,0 +1,13 @@
+<h2>Créer un gérant pour la quincaillerie</h2>
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <label>Nom d'utilisateur</label>
+  <input formControlName="username" />
+
+  <label>Email</label>
+  <input formControlName="email" />
+
+  <label>Mot de passe</label>
+  <input type="password" formControlName="password" />
+
+  <button type="submit">Créer</button>
+</form>

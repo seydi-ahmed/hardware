@@ -23,7 +23,7 @@ export class StoreDetailsComponent implements OnInit {
     private router: Router,
     private storeService: StoreService,
     private productService: ProductService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
@@ -73,6 +73,11 @@ export class StoreDetailsComponent implements OnInit {
   navigateToCreateProduct(): void {
     this.router.navigate(['/stores', this.storeId, 'products', 'new']);
   }
+
+  navigateToCreateGerant(): void {
+    this.router.navigate(['/stores', this.store.id, 'gerant', 'new']);
+  }
+
 
   formatPrice(price: number): string {
     return new Intl.NumberFormat('fr-FR', {

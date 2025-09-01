@@ -14,6 +14,7 @@ import { PublicProductListComponent } from './public-product-list/public-product
 import { PublicProductDetailsComponent } from './public-product-details/public-product-details';
 import { PublicStoreDetailsComponent } from './public-store-details/public-store-details';
 import { PublicStoreProductsComponent } from './public-store-products/public-store-products';
+import { CreateGerantComponent } from './create-gerant-component/create-gerant-component';
 import { authGuard } from './guards/auth-guard';
 
 export const routes: Routes = [
@@ -68,6 +69,11 @@ export const routes: Routes = [
   {
     path: 'public/stores/:id/products',
     component: PublicStoreProductsComponent,
+  },
+  {
+    path: 'stores/:id/gerant/new',
+    component: CreateGerantComponent,
+    canActivate: [authGuard],
   },
   { path: '**', redirectTo: '' },
 ];

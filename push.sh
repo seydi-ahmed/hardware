@@ -1,4 +1,4 @@
 git add .
-git commit -m "Gérant testé via postman"
+git commit -m "Gérant frontend done"
 git push gitea
 git push github

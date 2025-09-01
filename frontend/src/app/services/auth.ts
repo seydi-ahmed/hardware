@@ -79,4 +79,9 @@ export class AuthService {
   isLoggedIn(): boolean {
     return !!this.getToken();
   }
+
+  createGerant(storeId: number, data: { username: string; email: string; password: string }) {
+    return this.http.post(`${this.apiUrl}/auth/createGerant`, { ...data, storeId });
+  }
+
 }

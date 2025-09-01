@@ -33,6 +33,7 @@ public class User {
     private List<HardwareStore> hardwareStores;
 
     // Relation gérant → une seule quincaillerie
+    @JsonIgnore
     @OneToOne(mappedBy = "gerant")
     private HardwareStore managedStore;
 }
