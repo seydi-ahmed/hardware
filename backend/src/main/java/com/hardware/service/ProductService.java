@@ -12,6 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -21,14 +22,15 @@ public class ProductService {
     private final HardwareStoreRepository hardwareStoreRepository;
     private final UserRepository userRepository;
 
-    public ProductService(ProductRepository productRepository, HardwareStoreRepository hardwareStoreRepository,
-            UserRepository userRepository) {
+    public ProductService(ProductRepository productRepository,
+                          HardwareStoreRepository hardwareStoreRepository,
+                          UserRepository userRepository) {
         this.productRepository = productRepository;
         this.hardwareStoreRepository = hardwareStoreRepository;
         this.userRepository = userRepository;
     }
 
-    // Récupérer l'utilisateur connecté
+    // 🔹 Récupérer l'utilisateur connecté
     private User getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
@@ -36,18 +38,24 @@ public class ProductService {
                 .orElseThrow(() -> new UsernameNotFoundException("Utilisateur non trouvé: " + username));
     }
 
-    // Créer un produit dans une quincaillerie (vérification que l'utilisateur est
-    // le propriétaire de la quincaillerie)
+    // 🔹 Vérification: est-ce que l'utilisateur est owner OU gérant du store ?
+    private void checkAccess(HardwareStore store, User currentUser) {
+        boolean isOwner = store.getOwner().getId().equals(currentUser.getId());
+        boolean isGerant = store.getGerant() != null && store.getGerant().getId().equals(currentUser.getId());
+
+        if (!isOwner && !isGerant) {
+            throw new RuntimeException("Accès refusé : vous n'êtes ni le propriétaire ni le gérant de cette quincaillerie");
+        }
+    }
+
+    // 🔹 Créer un produit
     public Product createProduct(Long storeId, ProductDto productDto) {
         User currentUser = getCurrentUser();
-        Optional<HardwareStore> storeOptional = hardwareStoreRepository.findById(storeId);
-        if (storeOptional.isEmpty()) {
-            throw new RuntimeException("Quincaillerie non trouvée");
-        }
-        HardwareStore store = storeOptional.get();
-        if (!store.getOwner().getId().equals(currentUser.getId())) {
-            throw new RuntimeException("Vous n'êtes pas le propriétaire de cette quincaillerie");
-        }
+        HardwareStore store = hardwareStoreRepository.findById(storeId)
+                .orElseThrow(() -> new RuntimeException("Quincaillerie non trouvée"));
+
+        checkAccess(store, currentUser);
+
         Product product = Product.builder()
                 .name(productDto.getName())
                 .price(productDto.getPrice())
@@ -57,31 +65,25 @@ public class ProductService {
         return productRepository.save(product);
     }
 
-    // Récupérer tous les produits d'une quincaillerie (vérification ownership)
+    // 🔹 Récupérer tous les produits
     public List<Product> getProductsByStore(Long storeId) {
         User currentUser = getCurrentUser();
-        Optional<HardwareStore> storeOptional = hardwareStoreRepository.findById(storeId);
-        if (storeOptional.isEmpty()) {
-            throw new RuntimeException("Quincaillerie non trouvée");
-        }
-        HardwareStore store = storeOptional.get();
-        if (!store.getOwner().getId().equals(currentUser.getId())) {
-            throw new RuntimeException("Vous n'êtes pas le propriétaire de cette quincaillerie");
-        }
+        HardwareStore store = hardwareStoreRepository.findById(storeId)
+                .orElseThrow(() -> new RuntimeException("Quincaillerie non trouvée"));
+
+        checkAccess(store, currentUser);
+
         return productRepository.findByStoreId(storeId);
     }
 
-    // Récupérer un produit spécifique (vérification ownership)
+    // 🔹 Récupérer un produit spécifique
     public Optional<Product> getProductById(Long storeId, Long productId) {
         User currentUser = getCurrentUser();
-        Optional<HardwareStore> storeOptional = hardwareStoreRepository.findById(storeId);
-        if (storeOptional.isEmpty()) {
-            throw new RuntimeException("Quincaillerie non trouvée");
-        }
-        HardwareStore store = storeOptional.get();
-        if (!store.getOwner().getId().equals(currentUser.getId())) {
-            throw new RuntimeException("Vous n'êtes pas le propriétaire de cette quincaillerie");
-        }
+        HardwareStore store = hardwareStoreRepository.findById(storeId)
+                .orElseThrow(() -> new RuntimeException("Quincaillerie non trouvée"));
+
+        checkAccess(store, currentUser);
+
         Optional<Product> productOptional = productRepository.findById(productId);
         if (productOptional.isEmpty() || !productOptional.get().getStore().getId().equals(storeId)) {
             return Optional.empty();
@@ -89,43 +91,40 @@ public class ProductService {
         return productOptional;
     }
 
-    // Mettre à jour un produit (vérification ownership)
+    // 🔹 Mettre à jour un produit
     public Optional<Product> updateProduct(Long storeId, Long productId, ProductDto productDto) {
         User currentUser = getCurrentUser();
-        Optional<HardwareStore> storeOptional = hardwareStoreRepository.findById(storeId);
-        if (storeOptional.isEmpty()) {
-            throw new RuntimeException("Quincaillerie non trouvée");
-        }
-        HardwareStore store = storeOptional.get();
-        if (!store.getOwner().getId().equals(currentUser.getId())) {
-            throw new RuntimeException("Vous n'êtes pas le propriétaire de cette quincaillerie");
-        }
+        HardwareStore store = hardwareStoreRepository.findById(storeId)
+                .orElseThrow(() -> new RuntimeException("Quincaillerie non trouvée"));
+
+        checkAccess(store, currentUser);
+
         Optional<Product> productOptional = productRepository.findById(productId);
         if (productOptional.isEmpty() || !productOptional.get().getStore().getId().equals(storeId)) {
             return Optional.empty();
         }
+
         Product product = productOptional.get();
         product.setName(productDto.getName());
         product.setPrice(productDto.getPrice());
         product.setStock(productDto.getStock());
+
         return Optional.of(productRepository.save(product));
     }
 
-    // Supprimer un produit (vérification ownership)
+    // 🔹 Supprimer un produit
     public boolean deleteProduct(Long storeId, Long productId) {
         User currentUser = getCurrentUser();
-        Optional<HardwareStore> storeOptional = hardwareStoreRepository.findById(storeId);
-        if (storeOptional.isEmpty()) {
-            throw new RuntimeException("Quincaillerie non trouvée");
-        }
-        HardwareStore store = storeOptional.get();
-        if (!store.getOwner().getId().equals(currentUser.getId())) {
-            throw new RuntimeException("Vous n'êtes pas le propriétaire de cette quincaillerie");
-        }
+        HardwareStore store = hardwareStoreRepository.findById(storeId)
+                .orElseThrow(() -> new RuntimeException("Quincaillerie non trouvée"));
+
+        checkAccess(store, currentUser);
+
         Optional<Product> productOptional = productRepository.findById(productId);
         if (productOptional.isEmpty() || !productOptional.get().getStore().getId().equals(storeId)) {
             return false;
         }
+
         productRepository.deleteById(productId);
         return true;
     }

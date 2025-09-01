@@ -1,6 +1,7 @@
 package com.hardware.controllers;
 
 import com.hardware.dto.AuthResponse;
+import com.hardware.dto.CreateGerantRequest;
 import com.hardware.dto.LoginRequest;
 import com.hardware.dto.RegisterRequest;
 import com.hardware.service.AuthService;
@@ -27,5 +28,10 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest request) {
         return ResponseEntity.ok(authService.login(request));
+    }
+
+    @PostMapping("/create-gerant")
+    public ResponseEntity<AuthResponse> createGerant(@RequestBody CreateGerantRequest request) {
+        return ResponseEntity.ok(authService.createGerant(request));
     }
 }
